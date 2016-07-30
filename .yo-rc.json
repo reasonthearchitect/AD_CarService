@@ -1,0 +1,12 @@
+{
+  "generator-gaes": {
+    "baseName": "carStore",
+    "packageName": "com.rta.carstore",
+    "packageNameGenerated": "com.rta.carstore.generated",
+    "packageFolder": "com/rta/carstore",
+    "dockerreponame": "reasonthearchitect",
+    "indexname": "carstore",
+    "subreponame": "carstore",
+    "ports": "8200"
+  }
+}
