@@ -1,0 +1,54 @@
+{
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "vin",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 2,
+            "fieldName": "year",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldId": 3,
+            "fieldName": "make",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 4,
+            "fieldName": "model",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 5,
+            "fieldName": "odometer",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldId": 6,
+            "fieldName": "openingBid",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldId": 7,
+            "fieldName": "enddate",
+            "fieldType": "DateTime"
+        },
+        {
+            "fieldId": 8,
+            "fieldName": "stockNumber",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldId": 9,
+            "fieldName": "comments",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 10,
+            "fieldName": "additionalComments",
+            "fieldType": "String"
+        }
+    ]
+}

@@ -1,0 +1,24 @@
+{
+    "fields": [
+        {
+            "fieldId": 1,
+            "fieldName": "vin",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 2,
+            "fieldName": "year",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldId": 3,
+            "fieldName": "make",
+            "fieldType": "String"
+        },
+        {
+            "fieldId": 4,
+            "fieldName": "startdate",
+            "fieldType": "DateTime"
+        }
+    ]
+}
