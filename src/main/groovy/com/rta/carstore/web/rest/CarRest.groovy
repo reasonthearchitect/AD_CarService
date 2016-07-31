@@ -1,11 +1,15 @@
 package com.rta.carstore.web.rest
 
 import com.codahale.metrics.annotation.Timed
+import com.rta.carstore.domain.search.CarListRequest
 import com.rta.carstore.generated.web.rest.util.HeaderUtil
 import com.rta.carstore.domain.search.Car
 import com.rta.carstore.facade.ICarFacade
 import com.rta.carstore.generated.web.rest.util.PaginationUtil
+import com.rta.carstore.repository.search.ICarSearchRepository
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.Page
+import org.springframework.data.domain.PageRequest
 import org.springframework.data.domain.Pageable
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
@@ -25,6 +29,8 @@ public class CarRest {
 
 	@Inject
 	private ICarFacade carFacade;
+
+    @Autowired ICarSearchRepository carSearchRepository;
 
 	@RequestMapping(value = "/cars",
             method = RequestMethod.POST,
@@ -95,7 +101,27 @@ public class CarRest {
     public ResponseEntity<List<Car>> getAllCars(Pageable pageable)
             throws URISyntaxException {
         Page<Car> cars = this.carFacade.findAll(pageable);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(cars, "/api/v1/cars");
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(cars, "/api/cars");
         return new ResponseEntity<>(cars.getContent(), headers, HttpStatus.OK);
     }
+
+    @RequestMapping(value = "/carlistnotwatching",
+            method = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
+    public ResponseEntity<List<Car>> filterCarsByVinNotIn(@RequestBody CarListRequest request) {
+        PageRequest pr = new PageRequest(0, 200);
+        if (request.vins == null || request.vins.isEmpty()) {
+            return getAllCars(pr);
+        } else {
+            Page<Car> cars = this.carSearchRepository.findByVinNotIn(request.vins, pr);
+            HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(cars, "/carlistnotwatching");
+            return new ResponseEntity<>(cars.getContent(), headers, HttpStatus.OK);
+        }
+    }
+
+
+
+
+    //carSearchRepository
 }
