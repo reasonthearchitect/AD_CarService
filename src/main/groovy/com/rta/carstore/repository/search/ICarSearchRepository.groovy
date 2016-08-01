@@ -9,4 +9,6 @@ import org.springframework.data.elasticsearch.repository.ElasticsearchRepository
 interface ICarSearchRepository extends ElasticsearchRepository<Car, String> {
 
     Page<Car> findByVinNotIn(Collection<String> ids, Pageable pageable);
+
+    Page<Car> findByVinIn(Collection<String> ids, Pageable pageable);
 }

@@ -97,7 +97,6 @@ public class CarRest {
     @RequestMapping(value = "/cars",
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    @Timed
     public ResponseEntity<List<Car>> getAllCars(Pageable pageable)
             throws URISyntaxException {
         Page<Car> cars = this.carFacade.findAll(pageable);
@@ -108,20 +107,28 @@ public class CarRest {
     @RequestMapping(value = "/carlistnotwatching",
             method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    @Timed
     public ResponseEntity<List<Car>> filterCarsByVinNotIn(@RequestBody CarListRequest request) {
         PageRequest pr = new PageRequest(0, 200);
         if (request.vins == null || request.vins.isEmpty()) {
             return getAllCars(pr);
         } else {
             Page<Car> cars = this.carSearchRepository.findByVinNotIn(request.vins, pr);
-            HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(cars, "/carlistnotwatching");
+            HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(cars, "/api/carlistnotwatching");
             return new ResponseEntity<>(cars.getContent(), headers, HttpStatus.OK);
         }
     }
 
-
-
-
-    //carSearchRepository
+    @RequestMapping(value = "/carlistwatching",
+            method = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Car>> filterCarsByVinIn(@RequestBody CarListRequest request) {
+        PageRequest pr = new PageRequest(0, 200);
+        if (request.vins == null || request.vins.isEmpty()) {
+            return this.getAllCars(pr);
+        } else {
+            Page<Car> cars = this.carSearchRepository.findByVinIn(request.vins, pr);
+            HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(cars, "/api/carlistwatching");
+            return new ResponseEntity<>(cars.getContent(), headers, HttpStatus.OK);
+        }
+    }
 }

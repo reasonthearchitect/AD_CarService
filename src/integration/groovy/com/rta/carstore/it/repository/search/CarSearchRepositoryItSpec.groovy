@@ -24,7 +24,7 @@ class CarSearchRepositoryItSpec extends AbstractItTest {
     }
 
     @Test
-    def "to filter out stuff we do not need from the list based on Ids"() {
+    def "ensure that only cars we are not listening to are returned"() {
 
         setup:
         this.carSearchRepository.save([vin: "VIN1"] as Car)
@@ -35,6 +35,25 @@ class CarSearchRepositoryItSpec extends AbstractItTest {
 
         then:
         1 == carpage.getContent().size()
+        carpage.getContent()[0].vin == "VIN2"
+
+        cleanup:
+        this.carSearchRepository.deleteAll()
+    }
+
+    @Test
+    def "ensure that only cars we are listening to are returned"() {
+
+        setup:
+        this.carSearchRepository.save([vin: "VIN1"] as Car)
+        this.carSearchRepository.save([vin: "VIN2"] as Car)
+
+        when:
+        def carpage = this.carSearchRepository.findByVinIn(["VIN1"] as List<String>, new PageRequest(0, 20))
+
+        then:
+        1 == carpage.getContent().size()
+        carpage.getContent()[0].vin == "VIN1"
 
         cleanup:
         this.carSearchRepository.deleteAll()
