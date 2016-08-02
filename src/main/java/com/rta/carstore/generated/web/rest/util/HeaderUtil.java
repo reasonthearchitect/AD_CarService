@@ -8,6 +8,9 @@ import org.springframework.http.HttpHeaders;
  */
 public class HeaderUtil {
  
+    private HeaderUtil() {
+        // const
+    }
     public static HttpHeaders createAlert(String message, String param) {
         HttpHeaders headers = new HttpHeaders();
         headers.add("X-carstoreApp-alert", message);

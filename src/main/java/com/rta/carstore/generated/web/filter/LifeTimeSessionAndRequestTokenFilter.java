@@ -59,9 +59,19 @@ public class LifeTimeSessionAndRequestTokenFilter implements Filter {
         response.setHeader(X_REQUEST_TOKEN, requestToken);
     }
 
+    /**
+     * Just overriding this because of contract.
+     */
     @Override
-    public void destroy() {}
+    public void destroy() {
+        // Meets contract of the Filter interface.
+    }
 
+    /**
+     * Just overriding this because of contract.
+     */
     @Override
-    public void init(FilterConfig arg0) throws ServletException {}
+    public void init(FilterConfig arg0) throws ServletException {
+        // Meets contract of the Filter interface.
+    }
 }

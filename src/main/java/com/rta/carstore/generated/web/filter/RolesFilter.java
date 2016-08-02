@@ -10,7 +10,7 @@ import java.io.IOException;
  */
 public class RolesFilter implements Filter {
 
-    public static String X_ROLES_HEADER = "X-ROLES";
+    public static final String X_ROLES_HEADER = "X-ROLES";
 
     @Override
     public void doFilter(ServletRequest req, ServletResponse res,
@@ -25,7 +25,9 @@ public class RolesFilter implements Filter {
     }
 
     @Override
-    public void destroy() {}
+    public void destroy() {
+        // Meets contract of the Filter interface.
+    }
 
     @Override
     public void init(FilterConfig arg0) throws ServletException {}

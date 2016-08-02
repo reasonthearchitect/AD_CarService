@@ -1,6 +1,5 @@
 package com.rta.carstore.generated.web;
 
-import com.rta.carstore.generated.web.filter.CaosFilter;
 import com.rta.carstore.generated.web.filter.LifeTimeSessionAndRequestTokenFilter;
 import com.rta.carstore.generated.web.filter.RolesFilter;
 import org.springframework.boot.context.embedded.FilterRegistrationBean;
@@ -31,10 +30,5 @@ public class FilterRegistration {
     @Bean(name = "rolesFilter")
     public RolesFilter regesterRolesFilter() {
         return new RolesFilter();
-    }
-
-    @Bean(name = "caosFilter")
-    public CaosFilter regesterCaosFilter() {
-        return new CaosFilter();
     }
 }
