@@ -12,7 +12,27 @@ buildscript {
     }
 }
 
-apply plugin: org.sonarqube.gradle.SonarQubePlugin
+//apply plugin: org.sonarqube.gradle.SonarQubePlugin
+
+plugins {
+  id "java"
+  id "jacoco"
+  id "org.sonarqube" version "1.2"
+}
+
+test {
+  jacoco {
+    excludes += ['**/generated/**']
+  }
+}
+
+sonarqube {
+    properties {
+        property "sonar.projectName", "Java :: Car Store :: SonarQube Scanner for Gradle"
+        property "sonar.projectKey", "org.sonarqube:java-car-store-gradle"
+        property "sonar.jacoco.reportPath", "${project.buildDir}/jacoco/test.exec"
+    }
+}
 
 configurations {
   all*.exclude group: 'commons-logging'
@@ -40,7 +60,7 @@ clean {
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '2.7'
+    gradleVersion = '2.14'
 }
 
 task stage(dependsOn: 'bootRepackage') {
