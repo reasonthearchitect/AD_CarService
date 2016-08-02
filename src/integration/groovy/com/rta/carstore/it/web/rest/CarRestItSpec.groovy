@@ -127,8 +127,6 @@ class CarRestItSpec extends AbstractItTest {
         response.getStatusCode() == HttpStatus.OK
         response.getBody().size() == 0
         response.getHeaders().get('X-Total-Count').get(0)   == '0'
-        response.getHeaders().get('LINK-LAST').get(0)       == '</api/v1/cars?page=-1&size=1>'
-        response.getHeaders().get('LINK-FIRST').get(0)      == '</api/v1/cars?page=0&size=1>'
     }
 
     @Test
@@ -141,9 +139,6 @@ class CarRestItSpec extends AbstractItTest {
         response.getStatusCode() == HttpStatus.OK
         response.getBody().size() == 0
         response.getHeaders().get('X-Total-Count').get(0)   == '0'
-        response.getHeaders().get('LINK-PREV').get(0)       == '</api/v1/cars?page=0&size=1>'
-        response.getHeaders().get('LINK-LAST').get(0)       == '</api/v1/cars?page=-1&size=1>'
-        response.getHeaders().get('LINK-FIRST').get(0)      == '</api/v1/cars?page=0&size=1>'
     }
 
     @Test
@@ -161,9 +156,5 @@ class CarRestItSpec extends AbstractItTest {
         response.getStatusCode()    == HttpStatus.OK
         response.getBody().id       != null
         response.getHeaders().get('X-Total-Count').get(0)   == '3'
-        response.getHeaders().get('LINK-PREV').get(0)       == '</api/v1/cars?page=0&size=1>'
-        response.getHeaders().get('LINK-NEXT').get(0)       == '</api/v1/cars?page=2&size=1>'
-        response.getHeaders().get('LINK-FIRST').get(0)      == '</api/v1/cars?page=0&size=1>'
-        response.getHeaders().get('LINK-LAST').get(0)      == '</api/v1/cars?page=2&size=1>'
     }
 }
