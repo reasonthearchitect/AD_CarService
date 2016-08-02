@@ -30,5 +30,7 @@ public class RolesFilter implements Filter {
     }
 
     @Override
-    public void init(FilterConfig arg0) throws ServletException {}
+    public void init(FilterConfig arg0) throws ServletException {
+        // stub to override the interface.
+    }
 }

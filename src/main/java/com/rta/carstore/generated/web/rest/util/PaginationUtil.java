@@ -16,6 +16,10 @@ import java.net.URISyntaxException;
  */
 public class PaginationUtil {
 
+    private static final String PAGE = "?page=";
+
+    private static final String SIZE = "&size=";
+    
     private PaginationUtil() {
         //const.
     }
@@ -26,15 +30,15 @@ public class PaginationUtil {
         HttpHeaders headers = new HttpHeaders();
         headers.add("X-Total-Count", "" + Long.toString(page.getTotalElements()));
         if ((page.getNumber() + 1) < page.getTotalPages()) {
-            headers.add("LINK-NEXT", "<" + (new URI(baseUrl + "?page=" + (page.getNumber() + 1) + "&size=" + page.getSize())).toString() + ">");
+            headers.add("LINK-NEXT", "<" + (new URI(baseUrl + PAGE + (page.getNumber() + 1) + SIZE + page.getSize())).toString() + ">");
         }
 
         if ((page.getNumber()) > 0) {
-            headers.add("LINK-PREV", "<" + (new URI(baseUrl +"?page=" + (page.getNumber() - 1) + "&size=" + page.getSize())).toString() + ">");
+            headers.add("LINK-PREV", "<" + (new URI(baseUrl + PAGE + (page.getNumber() - 1) + SIZE + page.getSize())).toString() + ">");
         }
 
-        headers.add("LINK-LAST", "<" + (new URI(baseUrl +"?page=" + (page.getTotalPages() - 1) + "&size=" + page.getSize())).toString() + ">");
-        headers.add("LINK-FIRST", "<" + (new URI(baseUrl +"?page=" + 0 + "&size=" + page.getSize()).toString()) + ">");
+        headers.add("LINK-LAST", "<" + (new URI(baseUrl + PAGE + (page.getTotalPages() - 1) + SIZE + page.getSize())).toString() + ">");
+        headers.add("LINK-FIRST", "<" + (new URI(baseUrl + PAGE + 0 + SIZE + page.getSize()).toString()) + ">");
         return headers;
     }
 }

@@ -26,7 +26,9 @@ public class LoggingAspect {
     private Environment env;
 
     @Pointcut("within(com.rta.carstore.repository..*) || within(com.rta.carstore.service..*) || within(com.rta.carstore.web.rest..*)")
-    public void loggingPointcut() {}
+    public void loggingPointcut() {
+        // Empty.
+    }
 
     @AfterThrowing(pointcut = "loggingPointcut()", throwing = "e")
     public void logAfterThrowing(JoinPoint joinPoint, Throwable e) {
