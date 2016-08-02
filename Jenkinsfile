@@ -4,7 +4,7 @@ node {
 
     stage 'Build'
     sh "./gradlew build"
-    //step([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/TEST-*.xml'])
+    step([$class: 'JUnitResultArchiver', testResults: '**/build/test-results/TEST-*.xml'])
 
     stage 'Sonar'
     sh "./gradlew sonarqube"
