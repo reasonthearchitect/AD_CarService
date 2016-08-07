@@ -10,5 +10,5 @@ spring:
   profiles: prod
   cloud:
       config:
-        enabled: true
+        enabled: false
         uri: http://172.31.55.162:8888
