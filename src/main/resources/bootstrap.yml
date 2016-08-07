@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: ${SPRING_APPLICATION_NAME:carstore}
+  cloud:
+    config:
+      enabled: false
+
+---
+spring:
+  profiles: prod
+  cloud:
+      config:
+        enabled: true
+        uri: http://172.31.55.162:8888
