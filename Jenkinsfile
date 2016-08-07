@@ -9,6 +9,6 @@ node {
     stage 'BuildRunDocker'
     sh 'docker kill carstore'
     sh 'docker rm carstore'
-    //sh 'docker build -t reasonthearchitect/carstore .'
+    sh 'docker build -t reasonthearchitect/carstore .'
     //sh 'docker run -d --name carstore -p 8200:8200 reasonthearchitect/carstore'
 }
