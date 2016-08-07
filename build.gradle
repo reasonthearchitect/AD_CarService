@@ -7,26 +7,24 @@ buildscript {
         }
     }
     dependencies {
-        classpath "io.spring.gradle:dependency-management-plugin:0.5.3.RELEASE"
         classpath('org.springframework.boot:spring-boot-gradle-plugin:1.2.6.RELEASE')
         classpath "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.0.1"
     }
 }
 
-plugins {
-    id "java"
-    id "jacoco"
-    id "org.sonarqube" version "1.2"
-}
+//apply plugin: org.sonarqube.gradle.SonarQubePlugin
 
-apply plugin: "io.spring.dependency-management"
+plugins {
+  id "java"
+  id "jacoco"
+  id "org.sonarqube" version "1.2"
+}
 
 test {
   jacoco {
     excludes += ['**/generated/**']
   }
 }
-
 
 sonarqube {
     properties {
@@ -39,14 +37,6 @@ sonarqube {
 configurations {
   all*.exclude group: 'commons-logging'
 }
-
-//dependencyManagement {
-//    imports {
-//        mavenBom "org.springframework.cloud:spring-cloud-dependencies:Brixton.SR4"
-//    }
-//}
-
-
 
 apply from: 'gradle/conf/groovy.gradle'
 apply from: 'gradle/conf/lombok.gradle'

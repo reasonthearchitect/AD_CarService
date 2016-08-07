@@ -7,8 +7,8 @@ node {
     //step([$class: 'JUnitResultArchiver', testResults: '**/build/test-results/TEST-*.xml'])
 
     stage 'BuildRunDocker'
-    //sh 'docker kill carstore'
-    //sh 'docker rm carstore'
+    sh 'docker kill carstore'
+    sh 'docker rm carstore'
     sh 'docker build -t reasonthearchitect/carstore .'
-    //sh 'docker run -d --name carstore -p 8200:8200 reasonthearchitect/carstore'
+    sh 'docker run -d --name carstore -p 8200:8200 reasonthearchitect/carstore'
 }
