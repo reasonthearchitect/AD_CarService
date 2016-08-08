@@ -7,7 +7,8 @@ buildscript {
         }
     }
     dependencies {
-        classpath('org.springframework.boot:spring-boot-gradle-plugin:1.2.6.RELEASE')
+        classpath group: 'org.springframework.boot',  name: 'spring-boot-gradle-plugin',      version: spring_boot_version
+        classpath "io.spring.gradle:dependency-management-plugin:0.5.2.RELEASE"
         classpath "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.0.1"
     }
 }
@@ -18,6 +19,14 @@ plugins {
   id "java"
   id "jacoco"
   id "org.sonarqube" version "1.2"
+}
+
+apply plugin: "io.spring.dependency-management"
+
+dependencyManagement {
+    imports {
+        mavenBom 'org.springframework.cloud:spring-cloud-dependencies:Brixton.SR3'
+    }
 }
 
 test {
