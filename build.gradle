@@ -13,8 +13,6 @@ buildscript {
     }
 }
 
-//apply plugin: org.sonarqube.gradle.SonarQubePlugin
-
 plugins {
   id "java"
   id "jacoco"
@@ -37,7 +35,7 @@ test {
 
 sonarqube {
     properties {
-        property "sonar.projectName", "Java :: Car Store :: SonarQube Scanner for Gradle"
+        property "sonar.projectName", "Car Store"
 
         property "sonar.projectKey", "org.sonarqube:java-car-store-gradle"
         property "sonar.jacoco.reportPath", "${project.buildDir}/jacoco/test.exec"
