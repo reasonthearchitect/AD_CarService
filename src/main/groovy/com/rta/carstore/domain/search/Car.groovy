@@ -6,9 +6,7 @@ import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field
 import org.springframework.data.elasticsearch.annotations.FieldIndex
 import org.springframework.data.elasticsearch.annotations.FieldType
-import java.io.Serializable;
-import java.math.BigDecimal;
-import java.util.Date;
+
 /**
  * A Car.
  */

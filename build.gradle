@@ -31,15 +31,21 @@ dependencyManagement {
 
 test {
   jacoco {
-    excludes += ['**/generated/**']
+    excludes += ['**.generated.**']
   }
 }
 
 sonarqube {
     properties {
         property "sonar.projectName", "Java :: Car Store :: SonarQube Scanner for Gradle"
+
         property "sonar.projectKey", "org.sonarqube:java-car-store-gradle"
         property "sonar.jacoco.reportPath", "${project.buildDir}/jacoco/test.exec"
+        property "sonar.exclusions", "**/generated/**,**/Application.java"
+        property "sonar.sources", "src/main/java,src/main/groovy"
+        property "sonar.tests", "src/test/groovy"
+        property "sonar.language", "grvy"
+        property "sonar.binaries", "build/classes"
     }
 }
 
