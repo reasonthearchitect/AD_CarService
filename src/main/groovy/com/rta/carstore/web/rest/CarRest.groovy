@@ -127,4 +127,15 @@ public class CarRest {
             return new ResponseEntity<>(cars.getContent(), headers, HttpStatus.OK);
         }
     }
+
+    @RequestMapping(value = "/filteredsellerscars/{name}",
+            method = RequestMethod.POST,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Car>> carListForSeller(@PathVariable String name) {
+        PageRequest pr = new PageRequest(0, 200);
+
+        Page<Car> cars = this.carSearchRepository.findAllBySeller(name, pr);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(cars, "/api/filteredsellerscars");
+        return new ResponseEntity<>(cars.getContent(), headers, HttpStatus.OK);
+    }
 }

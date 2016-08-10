@@ -58,4 +58,22 @@ class CarSearchRepositoryItSpec extends AbstractItTest {
         cleanup:
         this.carSearchRepository.deleteAll()
     }
+
+    @Test
+    def "find all the cars where seller is named" () {
+
+        setup:
+        this.carSearchRepository.save(new Car(seller: "Bob"));
+        this.carSearchRepository.save(new Car(seller: "Steve"));
+        this.carSearchRepository.save(new Car(seller: "Bob"));
+
+        when:
+        def carpage = this.carSearchRepository.findAllBySeller("Bob", new PageRequest(0, 20));
+
+        then:
+        2 == carpage.getContent().size();
+
+        cleanup:
+        this.carSearchRepository.deleteAll();
+    }
 }

@@ -11,4 +11,6 @@ interface ICarSearchRepository extends ElasticsearchRepository<Car, String> {
     Page<Car> findByVinNotIn(Collection<String> ids, Pageable pageable);
 
     Page<Car> findByVinIn(Collection<String> ids, Pageable pageable);
+
+    Page<Car> findAllBySeller(String seller, Pageable pageable);
 }

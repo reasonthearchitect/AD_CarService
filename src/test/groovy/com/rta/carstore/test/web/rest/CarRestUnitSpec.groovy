@@ -17,10 +17,14 @@ public class CarRestUnitSpec extends Specification {
 
 	ICarFacade carFacade;
 
+    ICarSearchRepository carSearchRepository;
+
 	def setup() {
 		this.carRest = new CarRest();
 		this.carFacade = Mock(ICarFacade)
 		this.carRest.carFacade = carFacade;
+        this.carSearchRepository = Mock(ICarSearchRepository);
+        this.carRest.carSearchRepository = carSearchRepository
 	}
 
 	def "simple unit test for creating an entity through rest"() {
@@ -214,11 +218,6 @@ public class CarRestUnitSpec extends Specification {
 
     def "filter cars with the vins listed in the request"() {
 
-        setup:
-        def carSearchRepository = Mock(ICarSearchRepository);
-        this.carRest.carSearchRepository = carSearchRepository
-
-
         when:
         def result = this.carRest.filterCarsByVinIn(new CarListRequest(vins: ["1"]));
 
@@ -226,5 +225,16 @@ public class CarRestUnitSpec extends Specification {
         1 * carSearchRepository.findByVinIn(_, _) >> new PageImpl<Car>([new Car(id: "1")]);
         result.statusCode == HttpStatus.OK
         result.body.size() == 1
+    }
+
+    def "filter list of cars for the seller" () {
+
+        when:
+        def results = this.carRest.carListForSeller("Bob");
+
+        then:
+        1 * this.carSearchRepository.findAllBySeller(_, _) >> new PageImpl<Car>([new Car(id: "1")]);
+        results.statusCode == HttpStatus.OK
+        results.body.size() == 1
     }
 }
