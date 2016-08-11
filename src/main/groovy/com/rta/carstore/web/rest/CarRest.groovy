@@ -129,7 +129,7 @@ public class CarRest {
     }
 
     @RequestMapping(value = "/filteredsellerscars/{name}",
-            method = RequestMethod.POST,
+            method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Car>> carListForSeller(@PathVariable String name) {
         PageRequest pr = new PageRequest(0, 200);
